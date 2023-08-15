@@ -37,9 +37,10 @@ try:
                         price_element = link_soup.find(
                             'div', class_='amount--3NTpl')
                         if price_element:
+                            
                             price = price_element.text.strip()
-
                         else:
+                            price = "NaN"
                             raise ValueError("Price element not found")
                     except (ValueError, AttributeError) as e:
                         price = "NaN"
@@ -83,7 +84,7 @@ try:
 
         except Exception as e:
             # Save data to JSON
-            json_filename = "scraped_data.json"
+            json_filename = "scraped_data2.json"
             with open(json_filename, 'w', encoding='utf-8') as jsonfile:
                 json.dump(data_to_save, jsonfile, ensure_ascii=False, indent=4)
             # print(f"An unexpected error occurred: {e}")
@@ -94,12 +95,12 @@ except KeyboardInterrupt as keyboard:
 
 finally:
     # Save data to JSON
-    json_filename = "scraped_data.json"
+    json_filename = "scraped_data2.json"
     with open(json_filename, 'w', encoding='utf-8') as jsonfile:
         json.dump(data_to_save, jsonfile, ensure_ascii=False, indent=4)
 
     # Save data to CSV
-    csv_filename = "scraped_data.csv"
+    csv_filename = "scraped_data2.csv"
     csv_columns = data_to_save[0].keys() if data_to_save else []  # Ensure there's data
 
     with open(csv_filename, 'w', newline='', encoding='utf-8') as csvfile:
